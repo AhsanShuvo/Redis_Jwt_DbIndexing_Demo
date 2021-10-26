@@ -1,5 +1,31 @@
-<div class="row">
-    <div class="col-6 form-group">
-        <input type="text" class="form-control" name="Your name"/>
+<div class="d-flex justify-content-center">
+    <div class="card mt-5 col-4">
+        <div class="title text-center">
+            <h3 class="text-success">Log in</h3>
+        </div>
+        <div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+                <mat-form-field class="form-group col-12">
+                    <input class="form-control" matInput formControlName="email" placeholder="Email" appearance="fill">
+                    <mat-error *ngIf="loginForm.get('email')?.hasError('required') || loginForm.get('email')?.dirty">
+                        <mat-error *ngIf="loginForm.get('email')?.hasError('required'); else elseBlock">
+                            Email is required!
+                        </mat-error>
+                        <ng-template #elseBlock>
+                            <mat-error *ngIf="loginForm.get('email')?.dirty">
+                                Please enter a valid email address!
+                            </mat-error>
+                        </ng-template>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group col-12">
+                    <input matInput formControlName="password" placeholder="Password" type="password" class="form-control" appearance="fill">
+                    <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                      Password is required!
+                    </mat-error>
+                  </mat-form-field>
+                  <button mat-flat-button color="primary">Log In</button>
+            </form>
+        </div>
     </div>
 </div>
